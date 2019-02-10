@@ -1,0 +1,135 @@
+@import 'main';
+
+.ImageLinkForm {
+  width: 100%;
+
+  &__description {
+    text-align: center;
+  }
+
+  &__form {
+    width: 100%;
+    border-radius: 5px;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem;
+    background-color: #556;
+    background-image: linear-gradient(
+        30deg,
+        #445 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #445 87.5%,
+        #445
+      ),
+      linear-gradient(
+        150deg,
+        #445 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #445 87.5%,
+        #445
+      ),
+      linear-gradient(
+        30deg,
+        #445 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #445 87.5%,
+        #445
+      ),
+      linear-gradient(
+        150deg,
+        #445 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #445 87.5%,
+        #445
+      ),
+      linear-gradient(
+        60deg,
+        #99a 25%,
+        transparent 25.5%,
+        transparent 75%,
+        #99a 75%,
+        #99a
+      ),
+      linear-gradient(
+        60deg,
+        #99a 25%,
+        transparent 25.5%,
+        transparent 75%,
+        #99a 75%,
+        #99a
+      );
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    box-shadow: 0 0.25rem 0.25rem rgba($black, 0.4);
+
+    @include media(sm) {
+      width: 90%;
+    }
+
+    @include media(md) {
+      width: 70%;
+    }
+
+    @include media(lg) {
+      width: 50%;
+    }
+
+    &_inner {
+      display: flex;
+      width: 100%;
+      margin: 0 auto;
+
+      @include media(sm) {
+        width: 90%;
+      }
+
+      @include media(md) {
+        width: 70%;
+      }
+
+      @include media(lg) {
+        width: 50%;
+      }
+    }
+
+    &__input {
+      width: 70%;
+      height: 3rem;
+      border: 0;
+      outline: none;
+      padding: 0;
+      padding-left: 1rem;
+      font-family: inherit;
+      font-size: inherit;
+      color: $black;
+    }
+
+    &__button {
+      height: 3rem;
+      border: 0;
+      outline: none;
+      width: 30%;
+      font-size: inherit;
+      font-family: inherit;
+      text-transform: uppercase;
+      color: inherit;
+      background-color: $secondary;
+      transition: all 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1);
+        background-color: $secondaryLight;
+      }
+
+      &:active {
+        transform: scale(1);
+        background-color: $secondaryDark;
+      }
+    }
+  }
+}

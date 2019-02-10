@@ -1,0 +1,43 @@
+// Media Query Manager
+
+// 0 - 599px : Phone
+// 600 - 959px : Tablet portrait
+// 960 - 1263px : Tablet landscape
+// 1264 - 1919px : Desktop
+// 1920px+ : Big desktop
+
+// $breakpoint argument choices:
+// - xs - Phone
+// - sm - Tablet portrait
+// - md - Tablet landscape
+// - lg - Desktop
+// - xl - Big desktop
+
+// 1em = 16px (browser font size setting)
+// 600px / 16px = 37.5em
+// 960px / 16px = 60em
+// 1264px / 16px = 75em
+// 1920px / 16px = 112.5em
+
+@mixin media($breakpoint) {
+  @if $breakpoint == sm {
+    @media only screen and (min-width: 37.5em) {
+      @content;
+    } // 600px
+  }
+  @if $breakpoint == md {
+    @media only screen and (min-width: 60em) {
+      @content;
+    } // 960px
+  }
+  @if $breakpoint == lg {
+    @media only screen and (max-width: 79) {
+      @content;
+    } // 1264px
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 120em) {
+      @content;
+    } // 1920px
+  }
+}

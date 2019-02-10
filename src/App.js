@@ -2,6 +2,7 @@ import React from 'react';
 
 import Navigation from 'components/Navigation';
 import Logo from 'components/Logo';
+import ImageLinkForm from 'components/ImageLinkForm';
 import styles from './App.module.scss';
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
     <div className={styles.App}>
       <Navigation />
       <Logo />
+      <ImageLinkForm />
     </div>
   );
 }

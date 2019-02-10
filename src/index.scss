@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   @include font('regular');
   @include backgroundGradient;
+  color: $white;
+  @include fontSize(xs);
+
+  @include media(md) {
+    @include fontSize(sm);
+  }
 }
 
 code {
