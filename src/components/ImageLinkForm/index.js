@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-export default function ImageLinkForm() {
+export default function ImageLinkForm({ value, onChange, onSubmit }) {
   return (
     <div className={styles.ImageLinkForm}>
       <p className={styles.ImageLinkForm__description}>
@@ -9,8 +9,17 @@ export default function ImageLinkForm() {
       </p>
       <div className={styles.ImageLinkForm__form}>
         <div className={styles.ImageLinkForm__form_inner}>
-          <input type="text" className={styles.ImageLinkForm__form__input} />
-          <button className={styles.ImageLinkForm__form__button} type="submit">
+          <input
+            onChange={onChange}
+            value={value}
+            type="text"
+            className={styles.ImageLinkForm__form__input}
+          />
+          <button
+            className={styles.ImageLinkForm__form__button}
+            type="submit"
+            onClick={onSubmit}
+          >
             Detect
           </button>
         </div>
