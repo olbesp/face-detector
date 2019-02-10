@@ -23,7 +23,8 @@
       "error",
       "absolute-first"
     ],
-    "import/newline-after-import": "error"
+    "import/newline-after-import": "error",
+    "jsx-a11y/accessible-emoji": "off"
   },
   "globals": {
     "window": true,
@@ -37,5 +38,15 @@
   "parser": "babel-eslint",
   "env": {
     "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": [
+          "node_modules",
+          "src"
+        ]
+      }
+    }
   }
 }

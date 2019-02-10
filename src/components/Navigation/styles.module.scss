@@ -1,0 +1,17 @@
+@import 'main';
+
+.Navigation {
+  display: flex;
+  justify-content: flex-end;
+
+  &__link {
+    @include font('bold');
+    cursor: pointer;
+    color: $white;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $secondaryLight;
+    }
+  }
+}

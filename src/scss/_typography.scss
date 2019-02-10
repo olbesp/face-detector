@@ -1,0 +1,52 @@
+@font-face {
+  font-family: 'PressStart2P-Regular';
+  src: url('assets/fonts/PressStart2P-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'SourceCodePro-Bold';
+  src: url('assets/fonts/SourceCodePro-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'SourceCodePro-ExtraLight';
+  src: url('assets/fonts/SourceCodePro-ExtraLight.ttf');
+}
+
+@font-face {
+  font-family: 'SourceCodePro-Regular';
+  src: url('assets/fonts/SourceCodePro-Regular.ttf');
+}
+
+@mixin font($family) {
+  @if $family == 'regular' {
+    font-family: 'SourceCodePro-Regular', 'Courier New', Courier, monospace;
+  }
+  @if $family == 'bold' {
+    font-family: 'SourceCodePro-Bold', 'Courier New', Courier, monospace;
+  }
+  @if $family == 'light' {
+    font-family: 'SourceCodePro-ExtraLight', 'Courier New', Courier, monospace;
+  }
+  @if $family == 'special' {
+    font-family: 'PressStart2P-Regular', 'Courier New', Courier, monospace;
+  }
+}
+
+@mixin fontSize($size) {
+  @if $size == xs {
+    font-size: 1rem;
+  }
+  @if $size == sm {
+    font-size: 1.5rem;
+  }
+  @if $size == md {
+    font-size: 2rem;
+  }
+  @if $size == lg {
+    font-size: 3rem;
+  }
+  @if $size == xl {
+    font-size: 4rem;
+  }
+}
