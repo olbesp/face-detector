@@ -1,0 +1,62 @@
+@import 'main';
+
+.Signin {
+  height: 70vh;
+  @include flexCenterCenter;
+  flex-direction: column;
+  text-align: center;
+
+  &__form {
+    padding: 4rem;
+    width: 300px;
+    @include backgroundGradientDark;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 0.25rem 0.25rem rgba($black, 0.4);
+  }
+
+  &__form__inputContainer {
+    padding: 0.5rem 0;
+
+    &__input {
+      background-color: $white;
+      height: 3rem;
+      border: 0;
+      outline: none;
+      padding: 0;
+      padding-left: 1rem;
+      font-family: inherit;
+      font-size: inherit;
+      color: $black;
+
+      &_focused {
+        background-color: $black;
+        color: $white;
+      }
+    }
+  }
+
+  &__form__button {
+    height: 3rem;
+    border: 0;
+    outline: none;
+    width: 100%;
+    font-size: inherit;
+    font-family: inherit;
+    text-transform: uppercase;
+    color: inherit;
+    background-color: $secondary;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+      background-color: $secondaryLight;
+    }
+
+    &:active {
+      transform: scale(1);
+      background-color: $secondaryDark;
+    }
+  }
+}

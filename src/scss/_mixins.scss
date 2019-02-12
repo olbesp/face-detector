@@ -2,6 +2,14 @@
   background-image: linear-gradient(to right, $primary, $tertiary);
 }
 
+@mixin backgroundGradientDark {
+  background-image: linear-gradient(
+    to right,
+    rgba($secondaryDark, 0.3),
+    rgba($secondaryLight, 0.3)
+  );
+}
+
 @mixin fullSize {
   width: 100%;
   height: 100%;
