@@ -18,7 +18,8 @@ export default function App() {
   const [input, setInput] = useState('');
   const [imgUrl, setImgUrl] = useState('');
   const [frames, setFrames] = useState([]);
-  const [route] = useState('signin');
+  const [route, setRoute] = useState('signin');
+  const [isAuthenticated, setAuth] = useState(false);
 
   const onSubmit = () => {
     setImgUrl(input);
@@ -40,10 +41,14 @@ export default function App() {
   return (
     <div className={styles.App}>
       <Background isGlobal />
-      <Navigation />
+      <Navigation
+        onRouteChange={setRoute}
+        isAuthenticated={isAuthenticated}
+        onAuthenticate={setAuth}
+      />
       <Logo />
       {route === 'signin' ? (
-        <Signin />
+        <Signin onRouteChange={setRoute} onAuthenticate={setAuth} />
       ) : (
         <Fragment>
           <div className={styles.App__content}>

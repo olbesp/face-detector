@@ -25,6 +25,8 @@
     ],
     "import/newline-after-import": "error",
     "jsx-a11y/accessible-emoji": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
     "react/no-array-index-key": "off"
   },
   "globals": {

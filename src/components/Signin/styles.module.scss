@@ -7,7 +7,7 @@
   text-align: center;
 
   &__form {
-    padding: 4rem;
+    padding: 4rem 0;
     width: 300px;
     @include backgroundGradientDark;
     position: relative;
@@ -16,18 +16,18 @@
   }
 
   &__form__inputContainer {
-    padding: 0.5rem 0;
+    padding: 0.5rem 2rem;
 
     &__input {
       background-color: $white;
       height: 3rem;
       border: 0;
       outline: none;
-      padding: 0;
-      padding-left: 1rem;
+      padding: 0 2.5%;
       font-family: inherit;
       font-size: inherit;
       color: $black;
+      width: 95%;
 
       &_focused {
         background-color: $black;
@@ -57,6 +57,20 @@
     &:active {
       transform: scale(1);
       background-color: $secondaryDark;
+    }
+
+    &_transparent {
+      background-color: transparent;
+      border: 1px solid $white;
+
+      &:hover {
+        transform: scale(1);
+        background-color: transparent;
+      }
+
+      &:active {
+        background-color: transparent;
+      }
     }
   }
 }

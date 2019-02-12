@@ -9,13 +9,4 @@ body {
   @include backgroundGradient;
   color: $white;
   @include fontSize(xs);
-
-  @include media(md) {
-    @include fontSize(sm);
-  }
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
