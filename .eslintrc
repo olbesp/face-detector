@@ -19,6 +19,7 @@
     ],
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
+    "no-unused-vars": 1,
     "import/imports-first": [
       "error",
       "absolute-first"
@@ -27,6 +28,8 @@
     "jsx-a11y/accessible-emoji": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "no-useless-escape": "off",
     "react/no-array-index-key": "off"
   },
   "globals": {
@@ -40,7 +43,8 @@
   },
   "parser": "babel-eslint",
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true
   },
   "settings": {
     "import/resolver": {

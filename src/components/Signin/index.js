@@ -1,18 +1,77 @@
 import React, { useState } from 'react';
 
+import Alert from 'components/Alert';
+import api from 'api';
+import validate from 'utils/inputValidation';
 import styles from './styles.module.scss';
 
-export default function Signin({ onRouteChange, onAuthenticate }) {
+export default function Signin({ setUser, onRouteChange, onAuthenticate }) {
   const [focused, setFocus] = useState('');
   const [mode, setMode] = useState('signin');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorContent, setErrorContent] = useState('');
 
-  const handleSubmit = () => {
-    onRouteChange('home');
-    onAuthenticate(true);
+  const storeUserData = userData => {
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
+
+  const isInputValid = () => {
+    let isNameValid = true;
+    const isEmailValid = validate.email(email);
+    const isPasswordValid = validate.password(password);
+    if (mode === 'register') {
+      isNameValid = validate.name(name);
+    }
+
+    if (!isEmailValid) {
+      setErrorContent(validate.errors.email);
+    } else if (!isPasswordValid) {
+      setErrorContent(validate.errors.password);
+    } else if (!isNameValid) {
+      setErrorContent(validate.errors.name);
+    }
+
+    return isNameValid && isEmailValid && isPasswordValid;
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const isValid = isInputValid();
+    if (!isValid) return;
+    const data = {
+      email,
+      password
+    };
+    if (mode === 'register') {
+      data.name = name;
+    }
+
+    fetch(api[mode], {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(responseJson => responseJson.json())
+      .then(response => {
+        if (response && response.id) {
+          storeUserData(response);
+          setUser(response);
+          onRouteChange('home');
+          onAuthenticate(true);
+        } else {
+          setErrorContent(response);
+        }
+      })
+      .catch(error => {
+        setErrorContent(error);
+      });
   };
 
   return (
     <div className={styles.Signin}>
+      <Alert content={errorContent} disableAlert={() => setErrorContent('')} />
       <form className={styles.Signin__form}>
         {mode === 'register' && (
           <div className={styles.Signin__form__inputContainer}>
@@ -28,6 +87,8 @@ export default function Signin({ onRouteChange, onAuthenticate }) {
                   : null
               ].join(' ')}
               placeholder="Name"
+              value={name}
+              onChange={e => setName(e.target.value)}
             />
           </div>
         )}
@@ -44,8 +105,8 @@ export default function Signin({ onRouteChange, onAuthenticate }) {
                 : null
             ].join(' ')}
             placeholder="Email"
-            // value={''}
-            // onChange={on}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
         </div>
         <div className={styles.Signin__form__inputContainer}>
@@ -61,8 +122,8 @@ export default function Signin({ onRouteChange, onAuthenticate }) {
                 : null
             ].join(' ')}
             placeholder="Password"
-            // value={''}
-            // onChange={on}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
           />
         </div>
         <div className={styles.Signin__form__inputContainer}>

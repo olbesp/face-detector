@@ -1,0 +1,35 @@
+@import 'main';
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  @include fullSize;
+  @include flexCenterCenter;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.Alert {
+  width: 80%;
+  max-width: 500px;
+  min-height: 200px;
+  border-radius: 5px;
+  box-shadow: 0 0.5rem 2rem rgba($black, 0.4);
+
+  @include flexCenterCenter;
+  background: $white;
+
+  @include media(sm) {
+    width: 70%;
+  }
+
+  @include media(md) {
+    width: 50%;
+  }
+
+  &__content {
+    text-align: center;
+    color: $black;
+  }
+}

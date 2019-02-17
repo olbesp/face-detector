@@ -1,13 +1,16 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Clarifai from 'clarifai';
 
 import Background from 'components/Background';
 import Navigation from 'components/Navigation';
 import Logo from 'components/Logo';
+import Alert from 'components/Alert';
 import ImageLinkForm from 'components/ImageLinkForm';
 import FaceRecognition from 'components/FaceRecognition';
 import Rank from 'components/Rank';
 import Signin from 'components/Signin';
+import api from 'api';
+import validate from 'utils/inputValidation';
 import styles from './App.module.scss';
 
 const app = new Clarifai.App({
@@ -19,14 +22,58 @@ export default function App() {
   const [imgUrl, setImgUrl] = useState('');
   const [frames, setFrames] = useState([]);
   const [route, setRoute] = useState('signin');
+  const [user, setUser] = useState({});
   const [isAuthenticated, setAuth] = useState(false);
+  const [errorContent, setErrorContent] = useState('');
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+      setAuth(true);
+      setRoute('home');
+    }
+  }, []);
+
+  const isUrlValid = () => {
+    const isValid = validate.imgUrl(input);
+    if (!isValid) {
+      setErrorContent(validate.errors.imgUrl);
+    }
+    return isValid;
+  };
+
+  const putImageEntry = () => {
+    fetch(api.updateEntries, {
+      method: 'PUT',
+      body: JSON.stringify({ id: user.id }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(responseJson => responseJson.json())
+      .then(response => {
+        if (response) {
+          setUser({
+            ...user,
+            entries: response
+          });
+        }
+      })
+      .catch(error => {
+        setErrorContent(error);
+      });
+  };
 
   const onSubmit = () => {
+    const isValid = isUrlValid();
+    if (!isValid) return;
     setImgUrl(input);
     setFrames([]);
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, input)
       .then(response => {
+        if (response) {
+          putImageEntry();
+        }
         const { regions } = response.outputs[0].data;
         const boundingBoxes = regions.map(
           region => region.region_info.bounding_box
@@ -34,12 +81,13 @@ export default function App() {
         setFrames(boundingBoxes);
       })
       .catch(error => {
-        console.log(error);
+        setErrorContent(error);
       });
   };
 
   return (
     <div className={styles.App}>
+      <Alert content={errorContent} disableAlert={() => setErrorContent('')} />
       <Background isGlobal />
       <Navigation
         onRouteChange={setRoute}
@@ -48,11 +96,15 @@ export default function App() {
       />
       <Logo />
       {route === 'signin' ? (
-        <Signin onRouteChange={setRoute} onAuthenticate={setAuth} />
+        <Signin
+          onRouteChange={setRoute}
+          onAuthenticate={setAuth}
+          setUser={setUser}
+        />
       ) : (
         <Fragment>
           <div className={styles.App__content}>
-            <Rank />
+            <Rank name={user.name} entries={user.entries} />
             <ImageLinkForm
               onChange={e => setInput(e.target.value)}
               value={input}

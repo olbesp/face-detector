@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 
 export default function ImageLinkForm({ value, onChange, onSubmit }) {
+  const isDisabled = !value || value.trim().length === 0;
   return (
     <div className={styles.ImageLinkForm}>
       <p className={styles.ImageLinkForm__description}>
@@ -17,9 +18,12 @@ export default function ImageLinkForm({ value, onChange, onSubmit }) {
             className={styles.ImageLinkForm__form__input}
           />
           <button
-            className={styles.ImageLinkForm__form__button}
+            className={[
+              styles.ImageLinkForm__form__button,
+              isDisabled ? styles.ImageLinkForm__form__button_disabled : null
+            ].join(' ')}
             type="submit"
-            onClick={onSubmit}
+            onClick={isDisabled ? () => {} : onSubmit}
           >
             Detect
           </button>

@@ -3,7 +3,7 @@ import Particles from 'react-particles-js';
 
 import styles from './styles.module.scss';
 
-export default function Background({ isGlobal }) {
+const Background = React.memo(({ isGlobal }) => {
   const particlesOptions = {
     particles: {
       number: {
@@ -22,4 +22,6 @@ export default function Background({ isGlobal }) {
       params={particlesOptions}
     />
   );
-}
+});
+
+export default Background;

@@ -9,6 +9,7 @@ export default function Navigation({
   const logout = () => {
     onAuthenticate(false);
     onRouteChange('signin');
+    localStorage.removeItem('user');
   };
 
   return (
