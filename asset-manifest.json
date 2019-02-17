@@ -1,0 +1,14 @@
+{
+  "main.css": "/face-detector/static/css/main.a90ce6a1.chunk.css",
+  "main.js": "/face-detector/static/js/main.c590cbdf.chunk.js",
+  "main.js.map": "/face-detector/static/js/main.c590cbdf.chunk.js.map",
+  "static/js/1.5cb31957.chunk.js": "/face-detector/static/js/1.5cb31957.chunk.js",
+  "static/js/1.5cb31957.chunk.js.map": "/face-detector/static/js/1.5cb31957.chunk.js.map",
+  "runtime~main.js": "/face-detector/static/js/runtime~main.bd204893.js",
+  "runtime~main.js.map": "/face-detector/static/js/runtime~main.bd204893.js.map",
+  "static/media/index.scss": "/face-detector/static/media/SourceCodePro-Bold.86b8a4d1.ttf",
+  "static/css/main.a90ce6a1.chunk.css.map": "/face-detector/static/css/main.a90ce6a1.chunk.css.map",
+  "index.html": "/face-detector/index.html",
+  "precache-manifest.ad622129b71b7fb26b9b5d49235ca9ed.js": "/face-detector/precache-manifest.ad622129b71b7fb26b9b5d49235ca9ed.js",
+  "service-worker.js": "/face-detector/service-worker.js"
+}
