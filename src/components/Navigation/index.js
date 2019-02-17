@@ -4,9 +4,11 @@ import styles from './styles.module.scss';
 export default function Navigation({
   onRouteChange,
   isAuthenticated,
-  onAuthenticate
+  onAuthenticate,
+  clearSession
 }) {
   const logout = () => {
+    clearSession();
     onAuthenticate(false);
     onRouteChange('signin');
     localStorage.removeItem('user');

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import Clarifai from 'clarifai';
 
 import Background from 'components/Background';
 import Navigation from 'components/Navigation';
@@ -12,10 +11,6 @@ import Signin from 'components/Signin';
 import api from 'api';
 import validate from 'utils/inputValidation';
 import styles from './App.module.scss';
-
-const app = new Clarifai.App({
-  apiKey: process.env.REACT_APP_CLARIFAI_API_KEY
-});
 
 export default function App() {
   const [input, setInput] = useState('');
@@ -34,6 +29,13 @@ export default function App() {
       setRoute('home');
     }
   }, []);
+
+  const clearSession = () => {
+    setFrames([]);
+    setUser({});
+    setInput('');
+    setImgUrl('');
+  };
 
   const isUrlValid = () => {
     const isValid = validate.imgUrl(input);
@@ -68,8 +70,12 @@ export default function App() {
     if (!isValid) return;
     setImgUrl(input);
     setFrames([]);
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, input)
+    fetch(api.imageUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ input })
+    })
+      .then(response => response.json())
       .then(response => {
         if (response) {
           putImageEntry();
@@ -93,6 +99,7 @@ export default function App() {
         onRouteChange={setRoute}
         isAuthenticated={isAuthenticated}
         onAuthenticate={setAuth}
+        clearSession={clearSession}
       />
       <Logo />
       {route === 'signin' ? (
